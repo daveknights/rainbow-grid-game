@@ -1,0 +1,75 @@
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #040333;
+}
+
+.grid-game-container {
+    min-height: 100%;
+    margin: 0 auto;
+    max-width: 606px;
+}
+
+h1 {
+    font-size: 3rem;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.red {
+    color: #de2b35;
+}
+.orange {
+    color: #f47f2a;
+}
+.yellow {
+    color: #fbe755;
+}
+.green {
+    color: #30a64f;
+}
+.blue {
+    color: #3073de;
+}
+.indigo {
+    color: #7b39ca;
+}
+.violet {
+    color: #bf4dbf;
+}
+.gold {
+    color: #ab9333;
+}
+
+canvas {
+    border: solid 3px #ccc;
+}
+
+.instructions {
+    margin-top: 20px;
+}
+
+.instructions p {
+    color: white;
+    font-family: sans-serif;
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+.instructions p {
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
