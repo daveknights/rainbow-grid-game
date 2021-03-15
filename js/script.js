@@ -116,13 +116,13 @@ class ColourGridGame {
         this.grid.forEach((square, i) => {
             const squarePos = square.adjacentSquare[directionChange];
 
-            // This checks if 2 adjacent squares and merges them if true
+            // This checks if 2 adjacent squares are the same colour and merges them if true
             if (directionChange !== null && square.hasSquare === true && squarePos !== null && this.grid[squarePos-1].hasSquare === true &&
                 square.colour === this.grid[squarePos-1].colour) {
                 this.createSquare(this.grid[squarePos-1].coords, square.colour+1);
                 upDateGrid.push({key: squarePos-1, hasSquare: true, colour: square.colour+1});
                 upDateGrid.push({key:i, hasSquare: false, colour: ''});
-                // This clears squares that should merge but have already rendered in the loop 
+                // This clears squares that should merge but have already rendered in the loop
                 if (directionChange === 'left' && this.grid[i-2] !== undefined && this.grid[i-2].hasSquare === false && this.grid[i-2][directionChange] !== null) {
                     upDateGrid.push({key:i-2, hasSquare: false, colour: ''});
                     this.createSquare(this.grid[i-2].coords, 'clear');
