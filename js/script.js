@@ -36,8 +36,8 @@ class ColourGridGame {
             {coords: [squareSize*3, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 15,right: null,up: 12,down: null}, row: this.rows[3], column: this.columns[3]},
         ];
         this.squareSize = squareSize;
-        this.colours = ['#de2b35', '#f47f2a', '#fbe755', '#30a64f', '#3073de', '#7b39ca', '#bf4dbf', '#ab9333'];
         this.gold = '#ab9333';
+        this.colours = ['#de2b35', '#f47f2a', '#fbe755', '#30a64f', '#3073de', '#7b39ca', '#bf4dbf', this.gold];
         this.bgColour = '#040333';
         this.playing = false;
     }
