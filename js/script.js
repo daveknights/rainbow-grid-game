@@ -1,39 +1,28 @@
 class ColourGridGame {
     constructor(squareSize) {
-        this.container = document.querySelector('.grid-game-container');
+        this.gameContainer = document.querySelector('.grid-game-container');
+        this.canvasContainer = document.querySelector('.canvas-container');
         this.canvas = document.createElement('canvas');
         this.canvas.height = squareSize * 4;
         this.canvas.width = squareSize * 4;
         this.canvasCtx = this.canvas.getContext('2d');
-        this.rows = [
-            [0,1,2,3],
-            [4,5,6,7],
-            [8,9,10,11],
-            [12,13,14,15]
-        ];
-        this.columns = [
-            [0,4,8,12],
-            [1,5,9,13],
-            [2,6,10,14],
-            [3,7,11,15]
-        ];
         this.grid = [
-            {coords: [0,0], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 2,up: null,down: 5}, row: this.rows[0], column: this.columns[0]},
-            {coords: [squareSize,0], hasSquare: false, colour: '', adjacentSquare: {left: 1,right: 3,up: null,down: 6}, row: this.rows[0], column: this.columns[1]},
-            {coords: [squareSize*2,0], hasSquare: false, colour: '', adjacentSquare: {left: 2,right: 4,up: null,down: 7}, row: this.rows[0], column: this.columns[2]},
-            {coords: [squareSize*3,0], hasSquare: false, colour: '', adjacentSquare: {left: 3,right: null,up: null,down: 8}, row: this.rows[0], column: this.columns[3]},
-            {coords: [0,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 6,up: 1,down: 9}, row: this.rows[1], column: this.columns[0]},
-            {coords: [squareSize,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 5,right: 7,up: 2,down: 10}, row: this.rows[1], column: this.columns[1]},
-            {coords: [squareSize*2,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 6,right: 8,up: 3,down: 11}, row: this.rows[1], column: this.columns[2]},
-            {coords: [squareSize*3,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 7,right: null,up: 4,down: 12}, row: this.rows[1], column: this.columns[3]},
-            {coords: [0,squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 10,up: 5,down: 13}, row: this.rows[2], column: this.columns[0]},
-            {coords: [squareSize,squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 9,right: 11,up: 6,down: 14}, row: this.rows[2], column: this.columns[1]},
-            {coords: [squareSize*2, squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 10,right: 12,up: 7,down: 15}, row: this.rows[2], column: this.columns[2]},
-            {coords: [squareSize*3, squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 11,right: null,up: 8,down: 16}, row: this.rows[2], column: this.columns[3]},
-            {coords: [0,squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 14,up: 9,down: null}, row: this.rows[3], column: this.columns[0]},
-            {coords: [squareSize,squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 13,right: 15,up: 10,down: null}, row: this.rows[3], column: this.columns[1]},
-            {coords: [squareSize*2, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 14,right: 16,up: 11,down: null}, row: this.rows[3], column: this.columns[2]},
-            {coords: [squareSize*3, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 15,right: null,up: 12,down: null}, row: this.rows[3], column: this.columns[3]},
+            {coords: [0,0], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 2,up: null,down: 5}},
+            {coords: [squareSize,0], hasSquare: false, colour: '', adjacentSquare: {left: 1,right: 3,up: null,down: 6}},
+            {coords: [squareSize*2,0], hasSquare: false, colour: '', adjacentSquare: {left: 2,right: 4,up: null,down: 7}},
+            {coords: [squareSize*3,0], hasSquare: false, colour: '', adjacentSquare: {left: 3,right: null,up: null,down: 8}},
+            {coords: [0,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 6,up: 1,down: 9},},
+            {coords: [squareSize,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 5,right: 7,up: 2,down: 10}},
+            {coords: [squareSize*2,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 6,right: 8,up: 3,down: 11}},
+            {coords: [squareSize*3,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 7,right: null,up: 4,down: 12}},
+            {coords: [0,squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 10,up: 5,down: 13}},
+            {coords: [squareSize,squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 9,right: 11,up: 6,down: 14}},
+            {coords: [squareSize*2, squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 10,right: 12,up: 7,down: 15}},
+            {coords: [squareSize*3, squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 11,right: null,up: 8,down: 16}},
+            {coords: [0,squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 14,up: 9,down: null}},
+            {coords: [squareSize,squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 13,right: 15,up: 10,down: null}},
+            {coords: [squareSize*2, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 14,right: 16,up: 11,down: null}},
+            {coords: [squareSize*3, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 15,right: null,up: 12,down: null}},
         ];
         this.squareSize = squareSize;
         this.gold = '#ab9333';
@@ -48,28 +37,37 @@ class ColourGridGame {
     }
 
     restartGame = () => {
+        document.querySelector('.try-again').removeEventListener('click', this.restartGame);
+        document.querySelector('.end-screen').remove();
+
         this.clearGrid();
+
         this.grid.forEach(square => {
             square.hasSquare = false;
-            square.color = '';
+            square.colour = '';
         });
 
-        setTimeout(() => this.init());
+
+        this.startGame();
+        window.addEventListener('keydown', this.moveDirection);
     }
+
+    endScreen = (msg, btnValue) => `
+        <div class="end-screen">
+            <h2>${msg}</h2>
+            <p>Do you want to play again?</P>
+            <button class="try-again">${btnValue}</button>
+        </div>
+    `;
 
     endGame = result => {
         this.playing = false;
         window.removeEventListener('keydown', this.moveDirection);
 
-        if (result === 'win') {
-            if (window.confirm('You Win!, Do you want to play again?')) {
-                this.restartGame();
-            }
-        } else {
-            if (window.confirm('Game Over, Do you want to play again?')) {
-                this.restartGame();
-            }
-        }
+        this.canvasContainer.insertAdjacentHTML('afterbegin', result === 'win' ? this.endScreen('You Win!', 'Play again') : this.endScreen('Game Over', 'Try again'));
+
+        result === 'win' ? document.querySelector('.end-screen').classList.add('win') : '';
+        document.querySelector('.try-again').addEventListener('click', this.restartGame);
     }
 
     createSquare = (coords, colour) => {
@@ -163,17 +161,15 @@ class ColourGridGame {
             this.grid[updatedSquare.key].colour = updatedSquare.colour;
         });
 
-        if (this.grid.every(this.gridFull)) {
-            this.endGame('lose');
-        } else {
-            this.newSquare();
-        }
-
         if (this.grid.some(this.reachedGold)) {
             this.canvasCtx.fillStyle = this.gold;
             this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
             setTimeout(() => this.endGame('win'));
+        } else if (this.grid.every(this.gridFull)) {
+            this.endGame('lose');
+        } else {
+            this.newSquare();
         }
     }
 
@@ -202,8 +198,9 @@ class ColourGridGame {
     }
 
     init = () => {
-        this.container.style.width = `${(this.squareSize * 4) + 6}px`;
-        this.container.insertBefore(this.canvas, document.querySelector('.instructions'));
+        this.gameContainer.style.width = `${(this.squareSize * 4) + 6}px`;
+        this.canvasContainer.append(this.canvas);
+
         this.startGame();
 
         window.addEventListener('keydown', this.moveDirection);
