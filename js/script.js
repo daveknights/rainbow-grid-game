@@ -1,29 +1,41 @@
 class ColourGridGame {
-    constructor() {
+    constructor(squareSize) {
         this.container = document.querySelector('.grid-game-container');
         this.canvas = document.createElement('canvas');
-        this.canvas.height = 600;
-        this.canvas.width = 600;
+        this.canvas.height = squareSize * 4;
+        this.canvas.width = squareSize * 4;
         this.canvasCtx = this.canvas.getContext('2d');
-        this.grid = [
-            {coords: [0,0], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 2,up: null,down: 5}},
-            {coords: [150,0], hasSquare: false, colour: '', adjacentSquare: {left: 1,right: 3,up: null,down: 6}},
-            {coords: [300,0], hasSquare: false, colour: '', adjacentSquare: {left: 2,right: 4,up: null,down: 7}},
-            {coords: [450,0], hasSquare: false, colour: '', adjacentSquare: {left: 3,right: null,up: null,down: 8}},
-            {coords: [0,150], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 6,up: 1,down: 9}},
-            {coords: [150,150], hasSquare: false, colour: '', adjacentSquare: {left: 5,right: 7,up: 2,down: 10}},
-            {coords: [300,150], hasSquare: false, colour: '', adjacentSquare: {left: 6,right: 8,up: 3,down: 11}},
-            {coords: [450,150], hasSquare: false, colour: '', adjacentSquare: {left: 7,right: null,up: 4,down: 12}},
-            {coords: [0,300], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 10,up: 5,down: 13}},
-            {coords: [150,300], hasSquare: false, colour: '', adjacentSquare: {left: 9,right: 11,up: 6,down: 14}},
-            {coords: [300, 300], hasSquare: false, colour: '', adjacentSquare: {left: 10,right: 12,up: 7,down: 15}},
-            {coords: [450, 300], hasSquare: false, colour: '', adjacentSquare: {left: 11,right: null,up: 8,down: 16}},
-            {coords: [0,450], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 14,up: 9,down: null}},
-            {coords: [150,450], hasSquare: false, colour: '', adjacentSquare: {left: 13,right: 15,up: 10,down: null}},
-            {coords: [300, 450], hasSquare: false, colour: '', adjacentSquare: {left: 14,right: 16,up: 11,down: null}},
-            {coords: [450, 450], hasSquare: false, colour: '', adjacentSquare: {left: 15,right: null,up: 12,down: null}},
+        this.rows = [
+            [0,1,2,3],
+            [4,5,6,7],
+            [8,9,10,11],
+            [12,13,14,15]
         ];
-        this.squareSize = 150;
+        this.columns = [
+            [0,4,8,12],
+            [1,5,9,13],
+            [2,6,10,14],
+            [3,7,11,15]
+        ];
+        this.grid = [
+            {coords: [0,0], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 2,up: null,down: 5}, row: this.rows[0], column: this.columns[0]},
+            {coords: [squareSize,0], hasSquare: false, colour: '', adjacentSquare: {left: 1,right: 3,up: null,down: 6}, row: this.rows[0], column: this.columns[1]},
+            {coords: [squareSize*2,0], hasSquare: false, colour: '', adjacentSquare: {left: 2,right: 4,up: null,down: 7}, row: this.rows[0], column: this.columns[2]},
+            {coords: [squareSize*3,0], hasSquare: false, colour: '', adjacentSquare: {left: 3,right: null,up: null,down: 8}, row: this.rows[0], column: this.columns[3]},
+            {coords: [0,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 6,up: 1,down: 9}, row: this.rows[1], column: this.columns[0]},
+            {coords: [squareSize,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 5,right: 7,up: 2,down: 10}, row: this.rows[1], column: this.columns[1]},
+            {coords: [squareSize*2,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 6,right: 8,up: 3,down: 11}, row: this.rows[1], column: this.columns[2]},
+            {coords: [squareSize*3,squareSize], hasSquare: false, colour: '', adjacentSquare: {left: 7,right: null,up: 4,down: 12}, row: this.rows[1], column: this.columns[3]},
+            {coords: [0,squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 10,up: 5,down: 13}, row: this.rows[2], column: this.columns[0]},
+            {coords: [squareSize,squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 9,right: 11,up: 6,down: 14}, row: this.rows[2], column: this.columns[1]},
+            {coords: [squareSize*2, squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 10,right: 12,up: 7,down: 15}, row: this.rows[2], column: this.columns[2]},
+            {coords: [squareSize*3, squareSize*2], hasSquare: false, colour: '', adjacentSquare: {left: 11,right: null,up: 8,down: 16}, row: this.rows[2], column: this.columns[3]},
+            {coords: [0,squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: null,right: 14,up: 9,down: null}, row: this.rows[3], column: this.columns[0]},
+            {coords: [squareSize,squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 13,right: 15,up: 10,down: null}, row: this.rows[3], column: this.columns[1]},
+            {coords: [squareSize*2, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 14,right: 16,up: 11,down: null}, row: this.rows[3], column: this.columns[2]},
+            {coords: [squareSize*3, squareSize*3], hasSquare: false, colour: '', adjacentSquare: {left: 15,right: null,up: 12,down: null}, row: this.rows[3], column: this.columns[3]},
+        ];
+        this.squareSize = squareSize;
         this.colours = ['#de2b35', '#f47f2a', '#fbe755', '#30a64f', '#3073de', '#7b39ca', '#bf4dbf', '#ab9333'];
         this.gold = '#ab9333';
         this.bgColour = '#040333';
@@ -167,7 +179,7 @@ class ColourGridGame {
 
     moveDirection = e => {
         const keyCode = e.keyCode;
-        let directionChange = [];
+        let directionChange = '';
 
         switch (keyCode) {
             case 37:
@@ -200,6 +212,6 @@ class ColourGridGame {
 }
 
 window.addEventListener('load', () => {
-    const colourGrid = new ColourGridGame();
+    const colourGrid = new ColourGridGame(150);
     colourGrid.init();
 });
