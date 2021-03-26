@@ -198,9 +198,7 @@ class ColourGridGame {
                 directionChange = null;
         }
 
-        if (directionChange) {
-            this.moveSquares(directionChange);
-        }
+        directionChange ? this.moveSquares(directionChange) : null;
     }
 
     init = () => {
@@ -213,6 +211,6 @@ class ColourGridGame {
 }
 
 window.addEventListener('load', () => {
-    const colourGrid = new ColourGridGame(150);
+    const colourGrid = new ColourGridGame(120);
     colourGrid.init();
 });
