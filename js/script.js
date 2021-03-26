@@ -73,7 +73,7 @@ class ColourGridGame {
     }
 
     createSquare = (coords, colour) => {
-        const sqColour = colour ==='clear' ? this.bgColour : this.colours[colour];
+        const sqColour = colour === 'clear' ? this.bgColour : this.colours[colour];
 
         if (this.playing === true) {
             this.canvasCtx.fillStyle = sqColour;
@@ -204,6 +204,7 @@ class ColourGridGame {
     }
 
     init = () => {
+        this.container.style.width = `${(this.squareSize * 4) + 6}px`;
         this.container.insertBefore(this.canvas, document.querySelector('.instructions'));
         this.startGame();
 
